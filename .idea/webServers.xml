@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="9ae3770a-c096-4e46-a092-6403a516f07e" name="unix3" url="http://unix3.csc.calpoly.edu">
+        <fileTransfer host="unix3.csc.calpoly.edu" port="22" rootFolder="/home/amcinnis/csc453/program3" accessType="SFTP">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" />
+          </advancedOptions>
+          <option name="port" value="22" />
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>

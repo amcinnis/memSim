@@ -61,7 +61,8 @@ def getNextFrame(frameCursor, algorithm, RAM, numFrames):
         leastUsed = ramOrder.popitem(last=False)
         return leastUsed[0]
     else:
-        print "OPT"
+        # Did not implement OPT
+        return (frameCursor + 1) % numFrames
 
 
 def memSim():
@@ -100,13 +101,13 @@ def memSim():
             # Lookup page in Page Table
             frame = PTLookup(pageNum)
             tlbMisses += 1
-            print "TLB Miss"
+            #print "TLB Miss"
         else:
-            print "TLB Hit"
+            #print "TLB Hit"
             tlbHits += 1
 
         if frame is None:
-            print "Page Fault"
+            #print "Page Fault"
             # Hard Miss - Look up in Backing Store
             backingStore.seek(pageNum * 256)
             data = backingStore.read(256)
@@ -127,6 +128,8 @@ def memSim():
             pageTable[pageNum] = frameCursor
             insertTLB(pageNum, frameCursor)
             pageFaults += 1
+            # Get next frame
+            frameCursor = getNextFrame(frameCursor, pra, RAM, numFrames)
         else:
             # Get Data from RAM
             data = RAM[frame]
@@ -147,8 +150,6 @@ def memSim():
         print str(address) + ", " + str(referenceByte) + ", " + str(frame) + ", " \
               + ''.join(["%02X" % ord(x) for x in data]).strip()
 
-        # Get next frame
-        frameCursor = getNextFrame(frameCursor, pra, RAM, numFrames)
 
     print "Number of Translated Addresses = " + str(len(addresses))
     print "Page Faults = " + str(pageFaults)
